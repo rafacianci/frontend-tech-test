@@ -1,5 +1,6 @@
 import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 import {
   Content,
   Title,
@@ -34,9 +35,21 @@ class App extends PureComponent {
           <Tbody>
             { this.props.tasks.map(task => (
               <Tr key={task.id}>
-                <Td>{task.id}</Td>
-                <Td>{task.title}</Td>
-                <Td>{task.description}</Td>
+                <Td>
+                  <Link to={`task/${task.id}`}>
+                    {task.id}
+                  </Link>
+                </Td>
+                <Td>
+                  <Link to={`task/${task.id}`}>
+                    {task.title}
+                  </Link>
+                </Td>
+                <Td>
+                  <Link to={`task/${task.id}`}>
+                    {task.description}
+                  </Link>
+                </Td>
               </Tr>
             ))}
           </Tbody>

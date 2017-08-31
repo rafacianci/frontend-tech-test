@@ -1,4 +1,8 @@
 
+.__re-bulma_content {
+  padding: 0 15px;
+}
+
 .__re-bulma_content  p.__re-bulma_title {
   text-align: center;
   margin-bottom: 0;

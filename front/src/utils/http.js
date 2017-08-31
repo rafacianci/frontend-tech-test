@@ -7,3 +7,5 @@ export const setDefaults = () => {
 };
 
 export const get = url => axios.get(url);
+export const post = url => axios.post(url);
+export const put = url => axios.put(url);

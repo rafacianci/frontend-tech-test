@@ -1,0 +1,11 @@
+.__re-bulma_content .__re-bulma_column {
+  margin-bottom: 15px;
+}
+
+.cancel-button {
+  font-size: 14px;
+  line-height: 26px;
+  height: 35px;
+  font-weight: 500;
+  margin-right: 15px;
+}

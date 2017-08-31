@@ -32,10 +32,9 @@ app.get('/tasks', (req, res) => {
  */
 app.get('/task/:id', (req, res) => {
   const id = parseInt(req.params.id, 10);
-  res.setHeader('Access-Control-Allow-Origin', '*');
 
   if (!Number.isNaN(id)) {
-    const task = tasks.Container.find((item) => item.id === id);
+    const task = tasksContainer.tasks.find((item) => item.id === id);
 
     if (task !== null) {
       return res.status(200).json({
@@ -98,7 +97,7 @@ app.put('/task/update/:id/:title/:description', (req, res) => {
  */
 app.post('/task/create/:title/:description', (req, res) => {
   const task = {
-    id: tasksContainer.tasks.length,
+    id: tasksContainer.tasks.length + 1,
     title: req.params.title,
     description: req.params.description,
   };

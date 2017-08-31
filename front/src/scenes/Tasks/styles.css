@@ -1,0 +1,10 @@
+.newButton {
+  float: right;
+}
+
+.newButton a:visited,
+.newButton a {
+  border: none;
+  color: inherit;
+  text-decoration: none;
+}

@@ -12,7 +12,7 @@ import {
   Button,
 } from 're-bulma';
 
-import { getTask, save } from '../../actions/tasks';
+import { getTask, save, removeTask, clearEdition } from '../../actions/tasks';
 
 import './styles.css';
 
@@ -38,7 +38,12 @@ class TaskForm extends Component {
   }
 
   componentWillUnmount() {
-    // this.props.clearEdition();
+    this.props.clearEdition();
+  }
+
+  deleteTask = id => () => {
+    this.props.history.push('/tasks');
+    removeTask(id)
   }
 
   handleChange(input, value) {
@@ -52,7 +57,7 @@ class TaskForm extends Component {
 
   handleSubmit(event)  {
     event.preventDefault();
-    this.props.save(this.state.form);
+    save(this.state.form);
     this.props.history.push('/tasks');
   }
 
@@ -84,8 +89,19 @@ class TaskForm extends Component {
               ></Textarea>
             </Column>
             <Column size="is12">
-              <Link to="/" className="cancel-button">Cancelar</Link>
+              <Button className="cancelButton">
+                <Link to="/">Cancelar</Link>
+              </Button>
               <Button type="submit" color="isSuccess">Salvar</Button>
+              {(this.props.task && this.props.task.id) &&
+                <Button
+                  onClick={this.deleteTask(this.props.task.id)}
+                  className="deleteButton"
+                  color="isDanger"
+                >
+                  Delete
+                </Button>
+              }
             </Column>
           </Columns>
         </Content>
@@ -100,5 +116,5 @@ const mapStateProps = ({ tasks }) => ({
 
 export default connect(mapStateProps, {
   getTask,
-  save,
+  clearEdition,
 })(TaskForm);

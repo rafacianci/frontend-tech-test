@@ -4,6 +4,8 @@ export const GET_TASKS_ERROR = 'get_tasks_error';
 export const GET_TASK_SUCCESS = 'get_task_success';
 export const GET_TASK_ERROR = 'get_task_error';
 
+export const CLEAR_EDITION = 'clear_edition';
+
 export const SAVE_TASK_SUCCESS = 'save_task_success';
 export const SAVE_TASK_ERROR = 'save_task_error';
 

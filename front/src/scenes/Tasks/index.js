@@ -10,9 +10,12 @@ import {
   Tr,
   Td,
   Th,
+  Button
 } from 're-bulma';
 
 import { getTasks } from '../../actions/tasks';
+
+import './styles.css';
 
 class App extends PureComponent {
   componentWillMount() {
@@ -20,10 +23,12 @@ class App extends PureComponent {
   }
 
   render() {
-    console.log(this.props.tasks)
     return (
       <Content>
         <Title size="is1">Tasks</Title>
+        <Button color="isSuccess" className="newButton">
+          <Link to="task/new" >New</Link>
+        </Button>
         <Table>
           <Thead>
             <Tr>

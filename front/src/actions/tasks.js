@@ -3,11 +3,10 @@ import {
   GET_TASKS_ERROR,
   GET_TASK_SUCCESS,
   GET_TASK_ERROR,
-  SAVE_TASK_SUCCESS,
-  SAVE_TASK_ERROR,
+  CLEAR_EDITION,
 } from './types';
 
-import { get, put, post } from '../utils/http';
+import { get, put, post, remove } from '../utils/http';
 
 export const getTasks = () => dispatch => (
   get('tasks').then(result => (
@@ -37,23 +36,18 @@ export const getTask = id => dispatch => (
   ))
 );
 
-export const save = task => dispatch => {
-  const success = result => dispatch({
-    type: SAVE_TASK_SUCCESS,
-    payload: task,
-  });
-
-  const error = error => dispatch({
-    type: SAVE_TASK_ERROR,
-  });
-
-  console.log(task)
-
+export const save = task => {
   if (task.id) {
-    put(`task/update/${task.id}/${task.title}/${task.description}`).then(success, error);
+    put(`task/update/${task.id}/${task.title}/${task.description}`);
     return;
   }
 
-  post(`task/create/${task.title}/${task.description}`).then(success, error);
+  post(`task/create/${task.title}/${task.description}`);
   return;
 }
+
+export const clearEdition = () => ({
+  type: CLEAR_EDITION,
+});
+
+export const removeTask = id => remove(`/task/delete/${id}`);

@@ -1,4 +1,4 @@
-import { GET_TASKS_SUCCESS, GET_TASK_SUCCESS } from '../actions/types';
+import { GET_TASKS_SUCCESS, GET_TASK_SUCCESS, CLEAR_EDITION } from '../actions/types';
 
 const initialState = {
   data: [],
@@ -17,6 +17,13 @@ export default (state = initialState, action) => {
     return {
       ...state,
       task: action.payload,
+    };
+  }
+
+  if (action.type === CLEAR_EDITION) {
+    return {
+      ...state,
+      task: {},
     };
   }
 

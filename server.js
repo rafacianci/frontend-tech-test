@@ -4,6 +4,7 @@ const app = require('express')();
 const tasksContainer = require('./tasks.json');
 
 app.use(function (req, res, next) {
+  res.header("Access-Control-Allow-Methods", "GET, PUT, POST, DELETE");
   res.header("Access-Control-Allow-Origin", "*");
   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Access-Control-Allow-Origin");
 
@@ -97,7 +98,7 @@ app.put('/task/update/:id/:title/:description', (req, res) => {
  */
 app.post('/task/create/:title/:description', (req, res) => {
   const task = {
-    id: tasksContainer.tasks.length + 1,
+    id: tasksContainer.tasks[tasksContainer.tasks.length - 1].id + 1,
     title: req.params.title,
     description: req.params.description,
   };
@@ -126,7 +127,7 @@ app.delete('/task/delete/:id', (req, res) => {
     const task = tasksContainer.tasks.find(item => item.id === id);
 
     if (task !== null) {
-      const taskIndex = tasksContainer.tasks;
+      const taskIndex = tasksContainer.tasks.findIndex(item => item.id === id);
       tasksContainer.tasks.splice(taskIndex, 1);
       return res.status(200).json({
         message: 'Updated successfully',

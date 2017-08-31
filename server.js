@@ -3,6 +3,13 @@
 const app = require('express')();
 const tasksContainer = require('./tasks.json');
 
+app.use(function (req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Access-Control-Allow-Origin");
+
+  next();
+});
+
 /**
  * GET /tasks
  *
@@ -25,6 +32,7 @@ app.get('/tasks', (req, res) => {
  */
 app.get('/task/:id', (req, res) => {
   const id = parseInt(req.params.id, 10);
+  res.setHeader('Access-Control-Allow-Origin', '*');
 
   if (!Number.isNaN(id)) {
     const task = tasks.Container.find((item) => item.id === id);
@@ -139,3 +147,4 @@ app.delete('/task/delete/:id', (req, res) => {
 app.listen(9001, () => {
   process.stdout.write('the server is available on http://localhost:9001/\n');
 });
+

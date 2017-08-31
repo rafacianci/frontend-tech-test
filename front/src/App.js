@@ -1,7 +1,20 @@
 import React from 'react';
-import { Content } from 're-bulma';
+import { Provider } from 'react-redux';
+import { createStore, applyMiddleware } from 'redux';
+import thunk from 'redux-thunk';
+import {
+  BrowserRouter as Router,
+  Route,
+} from 'react-router-dom';
 import insertCss from 'insert-css';
 import css from 're-bulma/build/css';
+
+import reducers from './reducers';
+import { setDefaults } from './utils/http';
+
+import AppScene from './scenes/App';
+
+import './App.css';
 
 try {
   if (typeof document !== 'undefined' || document !== null) {
@@ -11,10 +24,20 @@ try {
   console.log(e)
 }
 
+const store = createStore(
+  reducers,
+  {},
+  applyMiddleware(thunk),
+);
+
+setDefaults();
+
 const App = () => (
-  <Content>
-    <h1>Test</h1>
-  </Content>
+  <Router>
+    <Provider store={store}>
+      <Route exact path="/" component={AppScene} />
+    </Provider>
+  </Router>
 );
 
 export default App;
